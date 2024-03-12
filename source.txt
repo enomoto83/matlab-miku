@@ -1,0 +1,673 @@
+%千本桜
+%音を長さを揃えて4つの音の重ね合わせで作る。
+%4chはsoundで再生できない
+%MikuC3の音をC4として使用
+%あらかじめミクのC3の音をmatlabに"MikuC4.wav"として保存
+%ターミナルで
+%sox test.wav -c 1 test2.wav 
+%を実行し、モノラルファイルにする
+%これをmatlabで再生
+%試行錯誤しながら初めて作ったためコードは汚いです。ごめんなさい
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%リサンプリング例
+[C4 fs] = audioread("mikuC4.wav");
+C3 = resample(C4,2,1,fs);
+C5 = resample(C4,1,2,fs);
+
+D3 = resample(C3,8,9,fs); 
+E3 = resample(C3,64,81,fs); 
+F3 = resample(C3,3,4,fs); 
+G3 = resample(C3,2,3,fs); 
+A3 = resample(C3,16,27,fs); 
+B3 = resample(C3,128,243,fs); 
+
+%test = [C3;D3;E3;F3;G3;A3;B3;C4];
+%sound(test,fs);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+audiowrite("mikuD2.wav",D2,fs); 
+audiowrite("mikuE2.wav",E2,fs); 
+audiowrite("mikuF2.wav",F2,fs); 
+audiowrite("mikuG2.wav",G2,fs);
+audiowrite("mikuA2.wav",A2,fs); 
+audiowrite("mikuB2.wav",B2,fs); 
+audiowrite("mikuC2.wav",C2,fs);
+fs = 44100; 
+T1 = [1.6, 1.6*fs];
+T2 = [0.8, 0.8*fs];
+%T3 = [0.5, 0.5*fs];
+T4 = [0.4, 0.4*fs];
+T6 = [0.3, 0.3*fs];
+T8 = [0.2, 0.2*fs];
+T16 = [0.1, 0.1*fs];
+T3ren = [0.06, 0.06*fs];
+T3renRest = [0.01, 0.01*fs];
+T32 = [0.05, 0.05*fs];
+
+% 無音区間
+[zero_2, fs] = audioread("zero.wav",T2);
+%[zero_3, fs] = audioread("zero.wav",T3);
+[zero_4, fs] = audioread("zero.wav",T4);
+[zero_6, fs] = audioread("zero.wav",T6);
+[zero_8, fs] = audioread("zero.wav",T8);
+[zero_16, fs] = audioread("zero.wav",T16);
+[zero_32, fs] = audioread("zero.wav",T32);
+[zero_3ren, fs] = audioread("zero.wav",T3ren);
+[zero_3renRest, fs] = audioread("zero.wav",T3renRest);
+
+[A3_2, fs] = audioread("mikuA3.wav",T2);
+[D4_2, fs] = audioread("mikuD4.wav",T2);
+[D5_2, fs] = audioread("mikuD5.wav",T2);
+[F5_2, fs] = audioread("mikuF5.wav",T2);
+[D6_2, fs] = audioread("mikuD6.wav",T2);
+
+
+[C2_4, fs] = audioread("mikuC2.wav",T4);
+[D2_4, fs] = audioread("mikuD2.wav",T4);
+[E2_4, fs] = audioread("mikuE2.wav",T4);
+[F2_4, fs] = audioread("mikuF2.wav",T4);
+[G2_4, fs] = audioread("mikuG2.wav",T4);
+[A2_4, fs] = audioread("mikuA2.wav",T4);
+[B2b_4, fs] = audioread("mikuB2b.wav",T4);
+[B2_4, fs] = audioread("mikuB2.wav",T4);
+[C3_4, fs] = audioread("mikuC3.wav",T4);
+[D3_4, fs] = audioread("mikuD3.wav",T4);
+[E3_4, fs] = audioread("mikuE3.wav",T4);
+[F3_4, fs] = audioread("mikuF3.wav",T4);
+[G3_4, fs] = audioread("mikuG3.wav",T4);
+[A3_4, fs] = audioread("mikuA3.wav",T4);
+[B3_4, fs] = audioread("mikuB3.wav",T4);
+[B3b_4, fs] = audioread("mikuB3b.wav",T4);
+[C4_4, fs] = audioread("mikuC4.wav",T4);
+[D4_4, fs] = audioread("mikuD4.wav",T4);
+[E4_4, fs] = audioread("mikuE4.wav",T4);
+[F4_4, fs] = audioread("mikuF4.wav",T4);
+[G4_4, fs] = audioread("mikuG4.wav",T4);
+[A4_4, fs] = audioread("mikuA4.wav",T4);
+[B4_4, fs] = audioread("mikuB4.wav",T4);
+[C5_4, fs] = audioread("mikuC5.wav",T4);
+[D5_4, fs] = audioread("mikuD5.wav",T4);
+[E5_4, fs] = audioread("mikuE5.wav",T4);
+[F5_4, fs] = audioread("mikuF5.wav",T4);
+[G5_4, fs] = audioread("mikuG5.wav",T4);
+[A5_4, fs] = audioread("mikuA5.wav",T4);
+[B5b_4, fs] = audioread("mikuB5b.wav",T4);
+[B5_4, fs] = audioread("mikuB5.wav",T4);
+[C6_4, fs] = audioread("mikuC6.wav",T4); 
+
+[C2_6, fs] = audioread("mikuC2.wav",T6);
+[D2_6, fs] = audioread("mikuD2.wav",T6);
+[E2_6, fs] = audioread("mikuE2.wav",T6);
+[F2_6, fs] = audioread("mikuF2.wav",T6);
+[G2_6, fs] = audioread("mikuG2.wav",T6);
+[A2_6, fs] = audioread("mikuA2.wav",T6);
+[B2_6, fs] = audioread("mikuB2.wav",T6);
+[C3_6, fs] = audioread("mikuC3.wav",T6);
+[D3_6, fs] = audioread("mikuD3.wav",T6);
+[E3_6, fs] = audioread("mikuE3.wav",T6);
+[F3_6, fs] = audioread("mikuF3.wav",T6);
+[G3_6, fs] = audioread("mikuG3.wav",T6);
+[A3_6, fs] = audioread("mikuA3.wav",T6);
+[B3_6, fs] = audioread("mikuB3.wav",T6);
+[C4_6, fs] = audioread("mikuC4.wav",T6);
+[D4_6, fs] = audioread("mikuD4.wav",T6);
+[E4_6, fs] = audioread("mikuE4.wav",T6);
+[F4_6, fs] = audioread("mikuF4.wav",T6);
+[G4_6, fs] = audioread("mikuG4.wav",T6);
+[A4_6, fs] = audioread("mikuA4.wav",T6);
+[B4_6, fs] = audioread("mikuB4.wav",T6);
+[C5_6, fs] = audioread("mikuC5.wav",T6);
+[D5_6, fs] = audioread("mikuD5.wav",T6);
+[E5_6, fs] = audioread("mikuE5.wav",T6);
+[F5_6, fs] = audioread("mikuF5.wav",T6);
+[G5_6, fs] = audioread("mikuG5.wav",T6);
+[A5_6, fs] = audioread("mikuA5.wav",T6);
+[B5_6, fs] = audioread("mikuB5.wav",T6);
+[C6_6, fs] = audioread("mikuC6.wav",T6);
+
+
+[C2_8, fs] = audioread("mikuC2.wav",T8);
+[D2_8, fs] = audioread("mikuD2.wav",T8);
+[E2_8, fs] = audioread("mikuE2.wav",T8);
+[F2_8, fs] = audioread("mikuF2.wav",T8);
+[G2_8, fs] = audioread("mikuG2.wav",T8);
+[A2_8, fs] = audioread("mikuA2.wav",T8);
+[B2b_8, fs] = audioread("mikuB2b.wav",T8);
+[B2_8, fs] = audioread("mikuB2.wav",T8);
+[C3_8, fs] = audioread("mikuC3.wav",T8);
+[D3_8, fs] = audioread("mikuD3.wav",T8);
+[E3_8, fs] = audioread("mikuE3.wav",T8);
+[F3_8, fs] = audioread("mikuF3.wav",T8);
+[G3_8, fs] = audioread("mikuG3.wav",T8);
+[A3_8, fs] = audioread("mikuA3.wav",T8);
+[B3b_8, fs] = audioread("mikuB3b.wav",T8);
+[B3_8, fs] = audioread("mikuB3.wav",T8);
+[C4_8, fs] = audioread("mikuC4.wav",T8);
+[D4_8, fs] = audioread("mikuD4.wav",T8);
+[E4_8, fs] = audioread("mikuE4.wav",T8);
+[F4_8, fs] = audioread("mikuF4.wav",T8);
+[G4_8, fs] = audioread("mikuG4.wav",T8);
+[A4_8, fs] = audioread("mikuA4.wav",T8);
+[B4b_8, fs] = audioread("mikuB4b.wav",T8);
+[B4_8, fs] = audioread("mikuB4.wav",T8);
+[C5_8, fs] = audioread("mikuC5.wav",T8);
+[D5_8, fs] = audioread("mikuD5.wav",T8);
+[E5_8, fs] = audioread("mikuE5.wav",T8);
+[F5_8, fs] = audioread("mikuF5.wav",T8);
+[G5_8, fs] = audioread("mikuG5.wav",T8);
+[A5_8, fs] = audioread("mikuA5.wav",T8);
+[B5b_8, fs] = audioread("mikuB5b.wav",T8);
+[B5_8, fs] = audioread("mikuB5.wav",T8);
+[C6_8, fs] = audioread("mikuC6.wav",T8);
+[D6_8, fs] = audioread("mikuD6.wav",T8);
+[E6_8, fs] = audioread("mikuE6.wav",T8);
+[F6_8, fs] = audioread("mikuF6.wav",T8);
+[G6_8, fs] = audioread("mikuG6.wav",T8);
+[A6_8, fs] = audioread("mikuA6.wav",T8);
+[B6_8, fs] = audioread("mikuB6.wav",T8);
+[C7_8, fs] = audioread("mikuC7.wav",T8); 
+
+[C2_16, fs] = audioread("mikuC2.wav",T16);
+[D2_16, fs] = audioread("mikuD2.wav",T16);
+[E2_16, fs] = audioread("mikuE2.wav",T16);
+[F2_16, fs] = audioread("mikuF2.wav",T16);
+[G2_16, fs] = audioread("mikuG2.wav",T16);
+[A2_16, fs] = audioread("mikuA2.wav",T16);
+[B2b_16, fs] = audioread("mikuB2b.wav",T16);
+[B2_16, fs] = audioread("mikuB2.wav",T16);
+[C3_16, fs] = audioread("mikuC3.wav",T16);
+[D3_16, fs] = audioread("mikuD3.wav",T16);
+[E3_16, fs] = audioread("mikuE3.wav",T16);
+[F3_16, fs] = audioread("mikuF3.wav",T16);
+[G3_16, fs] = audioread("mikuG3.wav",T16);
+[A3_16, fs] = audioread("mikuA3.wav",T16);
+[B3b_16, fs] = audioread("mikuB3b.wav",T16);
+[B3_16, fs] = audioread("mikuB3.wav",T16);
+[C4_16, fs] = audioread("mikuC4.wav",T16);
+[D4_16, fs] = audioread("mikuD4.wav",T16);
+[E4_16, fs] = audioread("mikuE4.wav",T16);
+[F4_16, fs] = audioread("mikuF4.wav",T16);
+[G4_16, fs] = audioread("mikuG4.wav",T16);
+[A4_16, fs] = audioread("mikuA4.wav",T16);
+[B4b_16, fs] = audioread("mikuB4b.wav",T16);
+[B4_16, fs] = audioread("mikuB4.wav",T16);
+[C5_16, fs] = audioread("mikuC5.wav",T16);
+[D5_16, fs] = audioread("mikuD5.wav",T16);
+[E5_16, fs] = audioread("mikuE5.wav",T16);
+[F5_16, fs] = audioread("mikuF5.wav",T16);
+[G5_16, fs] = audioread("mikuG5.wav",T16);
+[A5_16, fs] = audioread("mikuA5.wav",T16);
+[B5b_16, fs] = audioread("mikuB5b.wav",T16);
+[B5_16, fs] = audioread("mikuB5.wav",T16);
+[C6_16, fs] = audioread("mikuC6.wav",T16);
+[D6_16, fs] = audioread("mikuD6.wav",T16);
+[E6_16, fs] = audioread("mikuE6.wav",T16);
+[F6_16, fs] = audioread("mikuF6.wav",T16);
+
+
+
+%3連符
+[E4_3ren, fs] = audioread("mikuE4.wav",T3ren);
+[E4_3ren1, fs] = audioread("mikuE4.wav",T3renRest);
+[F4_3ren, fs] = audioread("mikuF4.wav",T3ren);
+[E5_3ren, fs] = audioread("mikuE5.wav",T3ren);
+[E5_3ren1, fs] = audioread("mikuE5.wav",T3renRest);
+[F5_3ren, fs] = audioread("mikuF5.wav",T3ren);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%千本桜前奏 右
+%音を長さを揃えて4つの音の重ね合わせで作る。
+%4chはsoundで再生できない
+%Matlabから合成ファイルをダウンロード
+%ターミナルで
+%sox test.wav -c 1 test2.wav 
+%を実行し、モノラルファイルにする
+%これをmatlabで再生
+
+
+
+%Sound
+E4ren = [E4_3ren1 E4_3ren1 zero_3renRest zero_3renRest];
+E5ren = [E5_3ren1 E5_3ren1 zero_3renRest zero_3renRest];
+Ma8 = [zero_8 zero_8 zero_8 zero_8];
+S1 = [A3_6 D4_6 zero_6 zero_6];
+S1 = S1 .* 1.2;
+S1_6 = [A3_6 D4_6 zero_6 zero_6];
+S1_4 = [A3_4 D4_4 zero_4 zero_4];
+S1_2 = [A3_2 D4_2 zero_2 zero_2];
+S2 = [A3_8 C4_8 zero_8 zero_8];
+S3 = [A3_6 D4_6 A3_6 zero_6];
+S4 = [A3_4 D4_4 G4_4 zero_4];
+S4 = S4 .* 0.8;
+S5 = [A3_6 D4_6 A4_6 zero_6];
+S6 = [D4_4 F4_4 zero_4 zero_4];
+S7 = [D4_4 G4_4 zero_4 zero_4];
+S8 = [D4_4 A4_4 zero_4 zero_4];
+S9 = [D4_8 G4_8 zero_8 zero_8];
+S10 = [A4_8 A4_8 zero_8 zero_8];
+S11 = [D4_16 D4_16 zero_16 zero_16];
+S12 = [C4_16 C4_16 zero_16 zero_16];
+S13 = [D4_8 F4_8  zero_8 zero_8];
+S14 = [E4_3ren E4_3ren zero_3ren zero_3ren];
+S14 = S14 .* 0.8;
+S15 = [F4_3ren F4_3ren zero_3ren zero_3ren];
+S15 = S15 .* 0.8;
+S16 = [D4_8 D4_8 zero_8 zero_8];
+S17 = [C4_8 C4_8 zero_8 zero_8];
+S18 = [C5_8 C5_8 zero_8 zero_8];
+S19 = [F5_8 F5_8 zero_8 zero_8];
+S20 = [E5_16 E5_16 zero_16 zero_16];
+S21 = [F5_16 F5_16 zero_16 zero_16];
+S22 = [D5_16 D5_16 zero_16 zero_16];
+S23 = [A4_8 C5_8 zero_8 zero_8];
+S24 = [B3b_8 D4_8 zero_8 zero_8];
+S25 = [F4_8 F4_8 zero_8 zero_8];
+S26 = [G4_16 G4_16 zero_16 zero_16];
+S27 = [E4_8 A4_8 zero_8 zero_8];
+S28 = [G4_16 G4_16 zero_16 zero_16];
+S29 = [A4_16 A4_16 zero_16 zero_16];
+S30 = [C5_16 C5_16 zero_16 zero_16];
+S31 = [A4_8 D5_8 F5_8 zero_8];
+S32 = [E5_3ren E5_3ren zero_3ren zero_3ren];
+S32 = S32 .* 0.6;
+S33 = [F5_3ren F5_3ren zero_3ren zero_3ren];
+S33 = S33 .* 0.6;
+S34 = [A4_8 D5_8 zero_8 zero_8];
+S35 = [A4_4 D5_4 zero_4 zero_4];
+S36 = [F4_8 F5_8 zero_8 zero_8];
+S37 = [A4_8 D5_8 G5_8 zero_8];
+S38 = [A5_8 A5_8 zero_8 zero_8];
+S39 = [D5_16 D5_16 zero_16 zero_16];
+S40 = [D5_8 G5_8 zero_8 zero_8];
+S41 = [D5_8 F5_8  zero_8 zero_8];
+S42 = [D5_8 D5_8 zero_8 zero_8];
+S43 = [A5_8 A5_8 zero_8 zero_8];
+S44 = [C6_8 C6_8 zero_8 zero_8];
+S45 = [F5_8 F6_8 F6_8 zero_8];
+S46 = [E6_16 E6_16 zero_16 zero_16];
+S47 = [F6_16 F6_16 zero_16 zero_16];
+S48 = [D6_16 D6_16 zero_16 zero_16];
+S49 = [A5_8 C6_8 zero_8 zero_8];
+S50 = [G5_16 G5_16 zero_16 zero_16];
+S51 = [C6_16 C6_16 zero_16 zero_16];
+S52 = [A6_16 A6_16 zero_16 zero_16];
+S53 = [C5_8 F5_8 zero_8 zero_8];
+S54 = [C5_8 G5_8 zero_8 zero_8];
+S55 = [E5_8 A5_8 zero_8 zero_8];
+S56 = [F4_6 A4_6 D5_6 zero_6];
+S57 = [F4_8 A4_8 C5_8 zero_8];
+S58 = [F4_4 A4_4 D5_4 zero_4];
+S59 = [D4_8 D4_8 zero_8 zero_8];
+%Music
+Node2 = [S1;S1_6;S2;S1_6;S1_6;S2];
+Node3 = [S1_6;S1_6;S2;S1_4;S4];
+Node4 = [S1;S1_6;S2;S1_6;S1_6;S2];
+Node5 = [S1_4;S6;S7;S8];
+Node5 = Node5 .* 1.2;
+Node6 = [S9;S10;S11;S12;S11;S12;S9;S10;S11;S12;S11;S12];
+Node7 = [S9;S10;S11;S12;S11;S12;S13;E4ren;S14;S15;E4ren;S14;S16;S17];
+Node8 = [S9;S10;S11;S12;S11;S12;S9;S10;S11;S12;S11;S12];
+Node9 = [S9;S10;S18;S19;S20;S21;S20;S22;S23;S10];
+Node10 = [S9;S10;S11;S12;S11;S12;S9;S10;S11;S12;S11;S12];
+Node11 = [S9;S10;S11;S12;S11;S12;S13;E4ren;S14;S15;S14;E4ren;S16;S17];
+Node12 = [S24;S12;S11;S25;S11;S26;S27;S28;S29;S30;S21;S29;S30];
+Node12 = Node12 .* 1.1;
+Node13 = [S31;E5ren;S32;S33;S32;E5ren;S34;S23;S35;S34;S36];
+Node13 = Node13 .* 1.2;
+Node14 = [S37;S38;S39;S30;S39;S30;S40;S38;S39;S30;S39;S30];
+Node15 = [S40;S38;S39;S30;S39;S30;S41;E5ren;S32;S33;S32;E5ren;S42;S18];
+Node16 = [S40;S38;S39;S30;S39;S30;S40;S38;S39;S30;S39;S30];
+Node17 = [S40;S38;S44;S45;S46;S47;S46;S48;S49;S43];
+Node18 = [S40;S38;S39;S30;S39;S30;S40;S38;S39;S30;S39;S30];
+Node19 = [S40;S38;S39;S30;S39;S30;S41;E5ren;S32;S33;S32;E5ren;S42;S18];
+Node20 = [S50;S21;S50;S51;S48;S51;S52;S50;S42;S53;S54;S55];
+Node20 = Node20 .* 1.2;
+Node21 = [S56;S56;S57;S58];
+Node22 = [S56;S56;S57;S58;S59;Ma8];
+
+
+Line1 = [Node2;Node3;Node4;Node5];
+Line2 = [Node6;Node7;Node8;Node9;Node10];
+Line3 = [Node11;Node12;Node13;Node14;Node15];
+Line4 = [Node16;Node17;Node18;Node19;Node20];
+Line5 = [Node21];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%千本桜前奏　左
+%音を長さを揃えて4つの音の重ね合わせで作る。
+%4chはsoundで再生できない
+%Matlabから合成ファイルをダウンロード
+%ターミナルで
+%sox test.wav -c 1 test2.wav 
+%を実行し、モノラルファイルにする
+%これをmatlabで再生
+
+
+%soundL
+Ma3ren = [zero_3renRest zero_3renRest zero_3renRest zero_3renRest];
+Ma4 = [zero_4 zero_4 zero_4 zero_4];
+Ma8 = [zero_8 zero_8 zero_8 zero_8];
+L1 = [D2_6 D3_6 zero_6 zero_6];
+L1f = L1 .* 1.2;
+L2 = [C2_8 C3_8 zero_8 zero_8];
+L3 = [D2_4 D3_4 zero_4 zero_4];
+L4 = [F2_4 F3_4 zero_4 zero_4];
+L5 = [D2_4 D3_4 zero_4 zero_4];
+L5 = L5 .* 1.1;
+L6 = [F2_4 F3_4 zero_4 zero_4 ];
+L6 = L6 .* 1.2;
+L7 = [G2_4 G3_4 zero_4 zero_4];
+L7 = L7 .* 1.3;
+L8 = [A2_4 A3_4 zero_4 zero_4];
+L8 = L8 .* 1.4;
+L9 = [B2b_4 B2b_4 zero_4 zero_4];
+L10 = [B2b_8 B2b_8 zero_8 zero_8]; %B2bB3b = L10;L11;
+L10 = L10 .* 0.8;
+L11 = [B3b_8 B3b_8 zero_8 zero_8];
+L11 = L11 .* 0.8;
+L12 = [C3_8 C3_8 zero_8 zero_8]; %C2C3 = L12;L13;
+L12 = L12 .* 0.8;
+L13 = [C4_8 C4_8 zero_8 zero_8];
+L13 = L13 .* 0.8;
+L14 = [D3_8 D3_8 zero_8 zero_8]; %D2D3 = L14;L15;
+L14 = L14 .* 0.8;
+L15 = [D4_8 D4_8 zero_8 zero_8];
+L15 = L15 .* 0.6;
+L16 = [B2b_4 B3b_4 zero_4 zero_4];
+L17 = [D3_6 D4_6 zero_6 zero_6];
+L18 = [F3_8 F4_8 zero_8 zero_8];
+L19 = [D3_4 D4_4 zero_4 zero_4];
+L20 = [D3_4 D3_4 zero_4 zero_4];
+L21 = [C3_4 C4_4 zero_4 zero_4];
+
+
+%Music
+NodeL2 = [L1f;L1;L2;L1;L1;L2];
+NodeL3 = [L1;L1;L2;L3;L4];
+NodeL4 = [L1f;L1;L2;L1;L1;L2];
+NodeL5 = [L5;L6;L7;L8];
+NodeL6 = [L9;L10;L11;L12;L13;L12;L13];
+NodeL7 = [L14;L15;L14;L15;L14;L15;L14;L15];
+NodeL8 = [L10;L11;L10;L11;L12;L13;L12;L13];
+NodeL9 = [L14;L15;L14;L15;L14;L15;L14;L15];
+NodeL10 = [L16;L10;L11;L12;L13;L12;L13];
+NodeL11 = [L14;L15;L14;L15;L14;L15;L14;L15];
+NodeL12 = [L10;L11;L10;L11;L12;L13;L12;L13];
+NodeL12 = NodeL12 .* 1.1;
+NodeL13 = [L17;L17;L18;L19;L20];
+NodeL13 = NodeL13 .* 1.2;
+NodeL14 = [L9;L10;L11;L12;L13;L12;L13];
+NodeL15 = [L14;L15;L14;L15;L14;L15;L14;L15];
+NodeL16 = [L10;L11;L10;L11;L12;L13;L12;L13];
+NodeL17 = [L14;L15;L14;L15;L14;L15;L14;L15];
+NodeL18 = [L16;L10;L11;L12;L13;L12;L13];
+NodeL19 = [L14;L15;L14;L15;L14;L15;L14;L15];
+NodeL20 = [L16;L10;L11;L21;L12;L13];
+NodeL20 = NodeL20 .* 1.2;
+NodeL21 = [L17;L17;L18;L19];
+NodeL22 = [L17;L17;L18;L19;L22;Ma8];
+
+LineL1 = [NodeL2;NodeL3;NodeL4;NodeL5];
+LineL2 = [NodeL6;NodeL7;NodeL8;NodeL9;NodeL10];
+LineL3 = [NodeL11;NodeL12;NodeL13;NodeL14;NodeL15];
+LineL4 = [NodeL16;NodeL17;NodeL18;NodeL19;NodeL20];
+LineL5 = [NodeL21];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%千本桜サビ　右
+
+%Sound
+Ma8 = [zero_8 zero_8 zero_8 zero_8];
+Ma4 = [zero_4 zero_4 zero_4 zero_4];
+M1 = [D5_8  D5_8 zero_8 zero_8];
+M2 = [F5_8  F5_8 zero_8 zero_8];
+M3 = [A4_6 D5_6 G5_6 zero_6];
+M4 = [D5_8 F5_8 A5_8 zero_8];
+M5 = [D5_4 F5_4 A5_4 zero_4];
+M6 = [A5_8 A5_8 zero_8 zero_8];
+M7 = [E5_8 G5_8 C6_8 zero_8];
+M8 = [D6_8 D6_8 zero_8 zero_8];
+M9 = [G5_8  G5_8 zero_8 zero_8];
+M10 = [C5_4 F5_4 A5_4 zero_4];
+M11 = [C5_8 E5_8 B5b_8 zero_8];
+M11 = M11 .* 0.8;
+M12 = [A4_4 C5_4 F5_4 zero_4];
+M13 = [D5_4 F5_4 B5b_4 zero_4];
+M13 = M13 .* 0.8;
+M14 = [A4_4 C5_4 G5_4 zero_4];
+M15 = [B4b_8 D5_8 G5_8 zero_8];
+M16 = [C5_8 E5_8 zero_8 zero_8];
+M17 = [C5_8 C5_8 zero_8 zero_8];
+M18 = [F4_4 A4_4 D5_4 zero_4];
+M19 = [G4_8 B4b_8 D5_8 G5_8];
+M19 = M19 .* 0.6;
+M20 = [F4_8 F5_8 zero_8 zero_8];
+M21 = [A4_8 E5_8 A5_8 zero_8];
+M22 = [C5_8 C6_8 zero_8 zero_8];
+M23 = [D5_2 F5_2 D5_2 zero_2];
+
+%Node
+Node31 = [M1;M2];
+Node32 = [M3;M3;M4;M5;Ma8;M6];
+Node33 = [M7;M8;M9;M2;M10;M1;M2];
+Node34 = [M3;M3;M4;M5;Ma8;M6];
+Node35 = [M11;M6;M9;M2;M12;M1;M2];
+Node36 = [M3;M3;M4;M5;Ma8;M6];
+Node37 = [M7;M8;M9;M2;M10;M1;M2];
+Node38 = [M13;M5;M14;M12];
+Node39 =  [M15;M6;M16;M17;M18;M1;M2];
+Node40 = [M3;M3;M4;M5;Ma8;M6];
+Node41 = [M7;M8;M9;M2;M10;M1;M2];
+Node42 = [M3;M3;M4;M5;Ma8;M6];
+Node43 = [M11;M6;M9;M2;M12;M1;M2];
+Node44 = [M3;M3;M4;M5;Ma8;M6];
+Node45 = [M7;M8;M9;M2;M10;M1;M2];
+Node46 = [M13;M5;M14;M12];
+Node47 = [M19;M20;M21;M22;M23];
+
+Line6 = [Node31;Node32;Node33;Node34;Node35];
+Line7 = [Node36;Node37;Node38;Node39;Node40;Node41];
+Line8 = [Node42;Node43;Node44;Node45;Node46;Node47];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%千本桜サビ　左
+
+
+%Sound
+Ma3ren = [zero_3renRest zero_3renRest zero_3renRest zero_3renRest];
+Ma8 = [zero_8 zero_8 zero_8 zero_8];
+Ma4 = [zero_4 zero_4 zero_4 zero_4];
+H1 = [D2_4 D3_4 zero_4 zero_4];
+H1 = H1 .* 1.4;
+H2 = [D3_8 D3_8 zero_8 zero_8];
+H2 = H2 .* 0.9;
+H3 = [D4_8 D4_8 zero_8 zero_8];
+H3 = H3 .* 0.8;
+H4 = [B2b_8 B2b_8 zero_8 zero_8]; %B2bB3b = H10;H11;
+H4 = H4 .* 0.9;
+H5 = [B3b_8 B3b_8 zero_8 zero_8];
+H5 = H5 .* 0.8;
+H6 =[C3_8 C3_8 zero_8 zero_8];
+H6 = H6 .* 0.9;
+H7 =[C4_8 C4_8 zero_8 zero_8];
+H7 =H7 .* 0.8;
+H8 =[F3_8 F3_8 zero_8 zero_8];
+H9 =[F4_8 F4_8 zero_8 zero_8];
+H10 =[E3_8 E3_8 zero_8 zero_8];
+H11 =[E4_8 E4_8 zero_8 zero_8];
+H12 =[A2_8 A2_8 zero_8 zero_8];
+H13 =[A3_8 A3_8 zero_8 zero_8];
+H14 =[D3_4 D4_4 zero_4 zero_4];
+H14 =H14 .* 1.2;
+H15 =[D3_8 D4_8 zero_8 zero_8];
+H15 =H15 .* 1.2;
+H16 =[F2_8 F3_8 zero_8 zero_8];
+H16 =H16 .* 1.2;
+H17 =[F3_8 F3_8 zero_8 zero_8];
+H18 =[E3_16 E3_16 zero_16 zero_16];
+H19 =[F3_16 F3_16 zero_16 zero_16];
+H20 =[C3_16 C3_16 zero_16 zero_16];
+H21 =[F2_8 F2_8 zero_8 zero_8];
+H22 =[A2_4 A3_4 zero_4 zero_4];
+H22 =H22 .* 1.2;
+H23 =[B2b_4 B3b_4 zero_4 zero_4]; 
+H23 =H23 .* 1.4;
+H24 =[C3_4 C4_4 zero_4 zero_4]; 
+H24 =H24 .* 1.4;
+H25 =[D3_4 D4_4 zero_4 zero_4]; 
+H25 =H25 .* 1.4;
+
+
+
+%Music
+NodeL31 = [Ma4];
+NodeL32 = [H1;H2;H3;H4;H5;H4;H5];
+NodeL33 = [H6;H7;H6;H7;H8;H9;H10;H11];
+NodeL34 = [H2;H3;H2;H3;H4;H5;H4;H5];
+NodeL35 = [H6;H7;H6;H7;H8;H9;H10;H11];
+NodeL36 = [H2;H3;H2;H3;H4;H5;H4;H5];
+NodeL37 = [H6;H7;H6;H7;H8;H9;H8;H9];
+NodeL38 = [H4;H5;H4;H5;H12;H13;H12;H13];
+NodeL39 = [H4;H5;H6;H7;H14;H15;H16];
+NodeL40 = [H1;H2;H3;H4;H5;H4;H5];
+NodeL41 = [H6;H7;H6;H7;H8;H9;H10;H11];
+NodeL42 = [H2;H3;H2;H3;H4;H5;H4;H5];
+NodeL43 = [H6;H7;H6;H7;H17;H17;H18;H19;H18;H20];
+NodeL44 = [H1;H2;H3;H4;H5;H4;H5];
+NodeL45 = [H6;H7;H6;H7;H21;H17;H21;H17];
+NodeL46 = [H4;H5;H4;H5;H12;H13;H22];
+NodeL47 = [H23;H24;H25;Ma4];
+
+LineL6 = [NodeL31;NodeL32;NodeL33;NodeL34;NodeL35];
+LineL7 = [NodeL36;NodeL37;NodeL38;NodeL39;NodeL40;NodeL41];
+LineL8 = [NodeL42;NodeL43;NodeL44;NodeL45;NodeL46;NodeL47];
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+introR = [Line1;Line2;Line3;Line4;Line5];
+introL = [LineL1;LineL2;LineL3;LineL4;LineL5];
+introL = introL .* 0.8;
+
+
+sabiR = [Line6;Line7;Line8];
+sabiL = [LineL6;LineL7;LineL8];
+sabiL = sabiL .* 0.8;
+
+
+outroR = [Node14;Node15;Line4;Node22];
+outroL = [NodeL14;NodeL15;LineL4;NodeL22];
+outroL = outroL .* 0.8;
+right = [introR;sabiR;outroR];
+left = [introL;sabiL;outroL];
+
+
+migi = [sabiR;outroR];
+hidari = [sabiL;outroL];
+intro = [introR introL];
+Intro = intro .* 1.2;
+
+audiowrite("right.wav",right,fs);
+audiowrite("left.wav",left,fs);
+audiowrite("migi.wav",migi,fs);
+audiowrite("hidari.wav",hidari,fs);
+audiowrite("intro.wav",intro,fs);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+sox migi.wav -c 1 migi1.wav
+sox hidari.wav -c 1 hidari1.wav
+sox right.wav -c 1 right1.wav
+sox left.wav -c 1 left1.wav
+sox intro.wav -c 1 intro1.wav
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[migi fs] = audioread("migi1.wav");
+[hidari fs] = audioread("hidari1.wav");
+[left fs] = audioread("left1.wav");
+[right fs] = audioread("right1.wav");
+[intro fs] = audioread("intro1.wav");
+
+migi = rev(migi,0.9,0.1);
+hidari = rev(hidari,0.9,0.1);
+right = rev(right,0.9,0.1);
+left = rev(left,0.9,0.1);
+intro = rev(intro,0.9,0.1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%コーラス
+bits=16;
+
+
+s0=migi;
+length_of_s=length(s0);
+
+
+chR=zeros(1,length_of_s);
+d=fs*0.025;
+depth=fs*0.01;
+rate=0.1;
+for n=1:length_of_s,
+    chR(n)=s0(n);
+    tau=d+depth*sin(2.0*pi*rate*(n-1)/fs);
+    t=n-tau;
+    m=floor(t);
+    delta=t-m;
+    if m>0 & m+1<=length_of_s
+        chR(n)=chR(n)+delta*s0(m+1)+(1.0-delta)*s0(m);
+    end
+end
+
+chR = chR .* 1.2;
+sound(chR,fs);
+
+
+%ディストーション
+bits=16;
+
+
+s0=hidari;
+length_of_s=length(s0);
+
+
+disL=zeros(1, length_of_s);
+gain=100;
+level=0.1;
+for n=1:length_of_s,
+    disL(n)=s0(n)*gain;
+    if disL(n)>=1
+        disL(n)=1;
+    elseif disL(n)<=-1
+        disL(n)=-1;
+    end
+    disL(n)=disL(n)*level;
+end
+disL = disL .* 0.4;
+sound(disL,fs);
+
+audiowrite("disL.wav",disL,fs);
+audiowrite("chR.wav",chR,fs);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ターミナル
+
+sox disL.wav -c 1 disL1.wav
+sox chR.wav -c 1 chR1.wav
+sox -m disL1.wav chR1.wav ef.wav        
+sox ef.wav -c 1 ef1.wav
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Matlab
+
+[ef fs] = audioread("ef1.wav");
+mu = [intro;ef];
+sound(mu,fs);
